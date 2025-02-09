@@ -1,0 +1,70 @@
+﻿<Window x:Class="DotNETAssessment.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Customer Sync App" Height="600" Width="900">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Controls for Sync Interval & Buttons -->
+        <StackPanel Orientation="Horizontal" Margin="5">
+            <Label Content="Sync Interval (Seconds):" VerticalAlignment="Center"/>
+            <TextBox Name="SyncIntervalTextBox" Width="50" Margin="5"/>
+            <Button Content="Start Sync" Click="StartSync_Click" Margin="5"/>
+            <Button Content="Manual Fetch" Click="ManualFetch_Click" Margin="5"/>
+            <Button Content="Fetch API" Click="FetchAPI_Click" />
+
+        </StackPanel>
+
+        <!-- DataGrids for Customers & Locations -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Customers DataGrid -->
+            <DataGrid Name="CustomerDataGrid" AutoGenerateColumns="False" Height="200" Margin="5">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerID}" Width="80"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150"/>
+                    <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="200"/>
+                    <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <!-- Locations DataGrid -->
+            <DataGrid Name="LocationDataGrid" AutoGenerateColumns="False" Height="200" Margin="5" Grid.Column="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Location ID" Binding="{Binding LocationID}" Width="100"/>
+                    <DataGridTextColumn Header="Customer ID" Binding="{Binding CustomerID}" Width="100"/>
+                    <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="300"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <!-- Log Panel & API Response View -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Log Panel -->
+            <StackPanel Grid.Column="0" Margin="5">
+                <TextBlock Text="Sync Log:" FontWeight="Bold" Margin="5"/>
+                <ListBox Name="SyncLogListBox" Height="150" Margin="5"/>
+            </StackPanel>
+
+            <!-- API Response View -->
+            <StackPanel Grid.Column="1" Margin="5">
+                <TextBlock Text="API Response:" FontWeight="Bold" Margin="5"/>
+                <TextBox Name="ApiResponseTextBox" Height="150" Margin="5" AcceptsReturn="True" TextWrapping="Wrap"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
